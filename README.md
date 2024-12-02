@@ -1,2 +1,15 @@
-# eureka-server
-EurekaServer for My MSA project
+# **Eureka Server**
+Eureka Server는 Spring Cloud Netflix 프로젝트의 일부로, **마이크로서비스 아키텍처**에서 서비스 등록 및 검색을 위한 중심 허브 역할을 합니다.
+이 서버는 각 마이크로서비스가 자신의 위치를 등록하고, 다른 서비스가 이를 검색할 수 있도록 합니다. 이를 통해 동적 로드 밸런싱 및 확장성을 지원합니다.
+
+
+## **기능**
+- **서비스 등록**: 각 마이크로서비스는 Eureka Client로 동작하며, 자신의 정보를 Eureka Server에 등록합니다.
+- **서비스 검색**: 다른 마이크로서비스는 Eureka Server를 통해 필요한 서비스를 검색할 수 있습니다.
+    - 마이크로서비스는 OpenFeign를 통해 다른 마이크로서비스와 통신합니다. 
+    - OpenFeign는 Eureka Server에 서비스를 검색하여 요청을 보냅니다.
+    - Gateway Server 또한 Eureka Server로부터 받은 레지스트리 정보를 활용하여 라우팅을 처리합니다.
+- **헬스 체크 및 인스턴스 제거**: 
+    - 등록된 마이크로서비스는 주기적으로 Eureka Server에 자신의 상태를 보고하여, 해당 서비스가 정상적으로 작동 중임을 알립니다.
+    - 등록된 마이크로서비스에서 상태 정보를 보고하지 않으면, Eureka Server는 해당 서비스 인스턴스를 레지스트리에서 제거합니다.
+
